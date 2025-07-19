@@ -1,2 +1,7 @@
-@import url("./styles/space-grotesk.css");
+@import url("./styles/fonts.css");
 @import "tailwindcss";
+
+@theme {
+  --font-grotesk: "Space Grotesk", sans-serif;
+  --font-satoshi: "Satoshi", sans-serif;
+}
