@@ -4,4 +4,11 @@
 @theme {
   --font-grotesk: "Space Grotesk", sans-serif;
   --font-satoshi: "Satoshi", sans-serif;
+  --color-nestWhite: #faf9f6;
+  --color-nestBlack: #100c08;
+  --color-charcoal: #1e1e1e;
+  --color-eggshell: #f4f1ec;
+  --color-sandBrown: #a78c64;
+  --color-softGray: #e5e5e5;
+  --color-glowPeach: #ffe9c9;
 }

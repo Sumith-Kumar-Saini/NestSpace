@@ -1,7 +1,11 @@
+import Hero from "@/layout/Hero";
+import Navbar from "@/layout/Navbar";
+
 const Home = () => {
   return (
-    <div className="w-full h-screen font-grotesk bg-zinc-900 flex justify-center items-center text-9xl uppercase text-stone-100">
-      Home
+    <div className="w-full relative">
+      <Navbar className="absolute top-0 z-10" />
+      <Hero />
     </div>
   );
 };

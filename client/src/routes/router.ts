@@ -1,5 +1,8 @@
 import Root from "@/layout/Root";
+import About from "@/pages/About";
 import Home from "@/pages/Home";
+import Product from "@/pages/Product";
+import Products from "@/pages/Products";
 import { type RouteObject } from "react-router";
 
 const routes: RouteObject[] = [
@@ -8,9 +11,9 @@ const routes: RouteObject[] = [
     Component: Root,
     children: [
       { index: true, Component: Home },
-      { path: "/about", element: "coming soon..." },
-      { path: "/products", element: "coming soon..." },
-      { path: "/product/:id", element: "coming soon..." },
+      { path: "/about", Component: About },
+      { path: "/products", Component: Products },
+      { path: "/product/:id", Component: Product },
 
       // Auth related
       { path: "/login", element: "coming soon..." },
