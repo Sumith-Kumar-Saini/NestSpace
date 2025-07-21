@@ -6,17 +6,19 @@ import { twMerge } from "tailwind-merge";
 const Navbar = ({ className }: { className?: string }) => {
   return (
     <div className={twMerge("w-full", className)}>
-      <div className="w-full py-4 px-10">
+      <div className="w-full h-12 md:h-16 my-4 px-4 md:px-10">
         {/* NavBar */}
-        <nav className="w-full h-full relative">
+        <nav className="w-full h-full relative flex justify-between items-center md:block">
           {/* CTA */}
-          <Button lightMode={true} className="absolute left-0">CTA Nest Modular Desk Kit</Button>
+          <Button className="static md:absolute left-0 hidden md:block">
+            CTA Nest Modular Desk Kit
+          </Button>
 
           {/* Logo */}
-          <HeadLogo lightMode={true} />
+          <HeadLogo className="static md:absolute left-0 md:-translate-x-1/2 md:left-1/2 px-0" />
 
           {/* Menu */}
-          <MenuButton lightMode={true} className="absolute right-0" />
+          <MenuButton className="static md:absolute right-0" />
         </nav>
       </div>
     </div>

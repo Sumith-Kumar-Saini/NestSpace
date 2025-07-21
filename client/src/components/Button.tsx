@@ -18,7 +18,7 @@ const Button: FC<ButtonProps> = ({
     <button
       {...rest}
       className={twMerge(
-        "h-16 outline-none w-fit rounded-md border border-charcoal p-4 cursor-pointer flex justify-center items-center",
+        "h-14 md:h-16 p-4 outline-none w-fit rounded-md border border-charcoal cursor-pointer flex justify-center items-center",
         mode && "border-eggshell",
         className
       )}
