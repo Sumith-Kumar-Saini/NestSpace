@@ -14,7 +14,7 @@ const MenuButton: FC<ButtonProps> = ({ className, lightMode, ...rest }) => {
     <button
       {...rest}
       className={twMerge(
-        "w-16 h-16 outline-none p-4 rounded-md border-charcoal border flex justify-center items-center cursor-pointer",
+        "w-12 h-12 md:w-16 md:h-16 p-3 md:p-4 outline-none rounded-md border-charcoal border flex justify-center items-center cursor-pointer",
         mode && "border-eggshell",
         className
       )}
@@ -24,7 +24,7 @@ const MenuButton: FC<ButtonProps> = ({ className, lightMode, ...rest }) => {
         <div
           className={twMerge(
             "w-full h-[1.618px] bg-charcoal",
-            mode && "bg-eggshell"
+            mode && "bg-eggshell';[p"
           )}
         ></div>
         <div

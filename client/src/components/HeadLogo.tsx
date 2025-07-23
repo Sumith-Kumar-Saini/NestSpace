@@ -15,7 +15,7 @@ const HeadLogo: FC<LogoProps> = ({ className, lightMode, to }) => {
     <NavLink
       to={to || "/"}
       className={twMerge(
-        "h-16 w-fit absolute -translate-x-1/2 left-1/2 p-4 flex justify-center items-center gap-2.5",
+        "h-16 w-fit px-1   py-4 flex justify-center items-center gap-2.5",
         className
       )}
     >
