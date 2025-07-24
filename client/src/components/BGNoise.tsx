@@ -11,8 +11,8 @@ const BGNoise: FC<ComponentProps<"div">> = ({
   return (
     <div className={twMerge("w-full relative", className)} {...rest}>
       <div
-        className="noise w-full h-screen absolute top-0 left-0 z-20 cursor-none pointer-events-none"
-        style={{ backgroundImage: NoiseSVG, opacity: .2 }}
+        className="noise w-full h-screen fixed top-0 left-0 z-20 cursor-none pointer-events-none"
+        style={{ backgroundImage: NoiseSVG, opacity: 0.25 }}
       ></div>
       <div className="w-full h-full absolute top-0 left-0">{children}</div>
     </div>

@@ -1,15 +1,21 @@
-import BGNoise from "@/components/BGNoise";
-import TestScroll from "@/components/TestScroll";
+import CommunityCTA from "@/layout/CommunityCTA";
 import Hero from "@/layout/Hero";
-import Navbar from "@/layout/Navbar";
+import SplitCard from "@/layout/ProblemSection";
+import ProductSpotLight from "@/layout/ProductSpotLight";
 
 const Home = () => {
   return (
-    <BGNoise className="w-full relative">
-      <Navbar className="absolute top-0 z-10" />
+    <>
       <Hero />
-      <TestScroll />
-    </BGNoise>
+      <div className="w-full h-[50vh] flex justify-center items-center">
+        <h3 className="text-3xl font-grotesk font-medium text-center">
+          Now Image This:
+        </h3>
+      </div>
+      <SplitCard />
+      <ProductSpotLight />
+      <CommunityCTA />
+    </>
   );
 };
 

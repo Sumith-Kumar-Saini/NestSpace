@@ -7,7 +7,7 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
     const data = await registerUser(email, password);
     res.status(201).json(data);
   } catch (error) {
-    next(error);
+    res.status(400).json({message: "Invalid credentials"})
   }
 };
 
@@ -17,6 +17,6 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     const data = await loginUser(email, password);
     res.json(data);
   } catch (error) {
-    next(error);
+    res.status(400).json({message: "Invalid credentials"})
   }
 };

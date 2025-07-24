@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { NavLink, type To } from "react-router";
+import { Link, type To } from "react-router";
 import { twMerge } from "tailwind-merge";
 
 interface LogoProps {
@@ -12,7 +12,7 @@ const HeadLogo: FC<LogoProps> = ({ className, lightMode, to }) => {
   const mode = Boolean(lightMode);
 
   return (
-    <NavLink
+    <Link
       to={to || "/"}
       className={twMerge(
         "h-16 w-fit px-1   py-4 flex justify-center items-center gap-2.5",
@@ -36,7 +36,7 @@ const HeadLogo: FC<LogoProps> = ({ className, lightMode, to }) => {
       >
         Space
       </div>
-    </NavLink>
+    </Link>
   );
 };
 

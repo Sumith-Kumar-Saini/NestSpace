@@ -11,7 +11,7 @@ const HeroContent = () => {
       </h1>
 
       {/* Subtext */}
-      <p className="md:w-1/2 text-sm md:text-lg 2xl:text-2xl leading-4 flex gap-1 text-charcoal flex-wrap">
+      <p className="md:w-1/2 text-sm md:text-lg 2xl:text-2xl leading-2.5 md:leading-4 flex gap-1 font-satoshi font-normal text-charcoal flex-wrap">
         <span className="w-fit">
           You don&#8217;t need more productivity hacks.
         </span>
@@ -21,7 +21,7 @@ const HeroContent = () => {
       {/* CTA Button */}
       <Button className="group mt-4 md:mt-6">
         <span className="flex items-center">
-          <span>Learn More</span>
+          <span>Explore the Setup</span>
           <MoveRight
             className="w-0 opacity-0 translate-x-[-10px] group-hover:ml-2 group-hover:w-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out"
             strokeWidth={1}
