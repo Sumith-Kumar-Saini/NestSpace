@@ -22,8 +22,7 @@ NestSpace helps remote professionals elevate their workspace through:
 
 ## ✨ Live Demo
 
-🌐 Live Website: Coming soon...  
-🎩 Demo Video: Coming soon...  
+🌐 Live Website: [nest-space-client.vercel.app](https://nest-space-client.vercel.app/)
 📦 Repository: [GitHub](https://github.com/Sumith-Kumar-Saini/NestSpace)
 
 ---
