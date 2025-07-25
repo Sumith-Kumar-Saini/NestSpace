@@ -1,37 +1,56 @@
-import type { ComponentProps, FC } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { Link } from "react-router";
 import { twMerge } from "tailwind-merge";
 
-interface CustomProps {
-  lightMode?: unknown;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Children to be rendered inside the button (text, icons, spans, etc.)
+   */
+  children: ReactNode;
+  /**
+   * Enable lightMode (text/border adjustments for dark background usage)
+   */
+  lightMode?: boolean;
+  /**
+   * Optional: Add additional styling using className
+   */
+  className?: string;
+  to?: string;
 }
 
-interface ButtonProps extends ComponentProps<"button">, CustomProps {}
-
-const Button: FC<ButtonProps> = ({
+const Button = ({
   children,
-  lightMode,
+  lightMode = false,
   className,
+  to,
   ...rest
-}) => {
-  const mode = Boolean(lightMode);
+}: ButtonProps) => {
+  const isLight = Boolean(lightMode);
+
   return (
-    <button
-      {...rest}
-      className={twMerge(
-        "h-14 md:h-16 p-4 outline-none w-fit rounded-md border border-charcoal cursor-pointer flex justify-center items-center",
-        mode && "border-eggshell",
-        className
-      )}
-    >
-      <span
+    <Link to={to || "/"}>
+      <button
+        {...rest}
         className={twMerge(
-          "font-satoshi text-md font-medium text-charcoal",
-          mode && "text-eggshell"
+          // Layout & structure
+          "inline-flex h-14 md:h-16 items-center justify-center px-6 rounded-md",
+          // Border & background
+          "border transition-all duration-300 ease-out group",
+          // Text & color
+          isLight
+            ? "border-eggshell text-eggshell"
+            : "border-charcoal text-charcoal",
+          // Focus ring
+          "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-charcoal/50 cursor-pointer",
+          // Responsive adjustments
+          "text-base font-medium",
+          className
         )}
       >
-        {children}
-      </span>
-    </button>
+        {/* Inner span allows nested hover animations (text + icon) */}
+        <span className="inline-flex items-center gap-2">{children}</span>
+      </button>
+    </Link>
   );
 };
 

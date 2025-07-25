@@ -1,7 +1,10 @@
-import { ReactLenis } from "lenis/react";
+import ReactLenis from "lenis/react";
 import { Outlet } from "react-router";
+import Navbar from "@/layout/Navbar";
+import Footer from "@/layout/Footer";
+import BGNoise from "@/components/BGNoise";
 
-const Root = () => {
+const App = () => {
   const lenisOptions = {
     lerp: 0.1, // Controls interpolation for smoothness
     duration: 1.5, // Defines how long a scroll should take
@@ -10,10 +13,14 @@ const Root = () => {
   };
 
   return (
-    <ReactLenis root options={lenisOptions}>
-      <Outlet />
-    </ReactLenis>
+    <BGNoise className="w-full relative flex justify-center">
+      <ReactLenis root options={lenisOptions}>
+        <Navbar className="absolute top-0 z-20" />
+        <Outlet />
+        <Footer />
+      </ReactLenis>
+    </BGNoise>
   );
 };
 
-export default Root;
+export default App;

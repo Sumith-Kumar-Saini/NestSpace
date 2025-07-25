@@ -12,6 +12,6 @@ const runValidation = (req: any, res: any, next: any) => {
 };
 
 router.post('/login', validateLogin, runValidation, login);
-router.post('/signup', validateSignup, runValidation, signup);
+router.post('/register', validateSignup, runValidation, signup);
 
 export default router;
