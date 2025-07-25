@@ -19,7 +19,7 @@ const HeroContent = () => {
       </p>
 
       {/* CTA Button */}
-      <Button className="group mt-4 md:mt-6">
+      <Button className="group mt-4 md:mt-6" to="/products">
         <span className="flex items-center">
           <span>Explore the Setup</span>
           <MoveRight

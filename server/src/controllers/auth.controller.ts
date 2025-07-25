@@ -1,22 +1,29 @@
-import { Request, Response, NextFunction } from 'express';
-import { registerUser, loginUser } from '../services/auth.service';
+import { Request, Response, NextFunction } from "express";
+import { registerUser, loginUser } from "../services/auth.service";
 
-export const signup = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { email, password } = req.body;
-    const data = await registerUser(email, password);
-    res.status(201).json(data);
-  } catch (error) {
-    res.status(400).json({message: "Invalid credentials"})
-  }
+interface SuccessResponse {
+  success: boolean;
+  data: any;
+}
+
+export const signup = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email, password } = req.body;
+  const data = await registerUser(email, password);
+  const response: SuccessResponse = { success: true, data };
+  res.status(201).json(response);
 };
 
-export const login = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { email, password } = req.body;
-    const data = await loginUser(email, password);
-    res.json(data);
-  } catch (error) {
-    res.status(400).json({message: "Invalid credentials"})
-  }
+export const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email, password } = req.body;
+  const data = await loginUser(email, password);
+  const response: SuccessResponse = { success: true, data };
+  res.status(200).json(response);
 };

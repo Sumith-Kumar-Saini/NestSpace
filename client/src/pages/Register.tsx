@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import { motion } from "framer-motion";
+import { ToastContainer } from "react-toastify";
 import axios from "@/lib/axios";
 import { Link, useNavigate } from "react-router";
+import "react-toastify/dist/ReactToastify.css";
 
 // Framer Motion variants
 const fadeIn = {
@@ -9,43 +11,28 @@ const fadeIn = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-const RegisterPage: React.FC = () => {
+const RegisterPage: () => JSX.Element = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
 
     // Client-side validation
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setIsLoading(false);
       return;
     }
 
     setIsLoading(true);
 
     try {
-      const response = await axios.post("/auth/register", {
-        email,
-        password,
-      });
-      // Handle successful registration (e.g., redirect to login or dashboard)
-      console.log("Registration successful:", response.data);
-      // Example redirect: window.location.href = '/login';
-      navigate("/login");
-    } catch (err) {
-      if (err instanceof Error) {
-        console.log(err.message);
-        setError(err.message || "Registration failed. Please try again.");
-      } else {
-        console.log(err);
-        setError("Registration failed. Please try again.");
-      }
+      const response = await axios.post("/api/auth/register", { email, password });
+      localStorage.setItem("token", response.data.data.token);
+      navigate("/products");
     } finally {
       setIsLoading(false);
     }
@@ -53,6 +40,7 @@ const RegisterPage: React.FC = () => {
 
   return (
     <section className="min-h-screen bg-eggshell flex flex-col lg:flex-row">
+      <ToastContainer />
       {/* Brand/Graphic Side - Hidden on mobile */}
       <div className="hidden lg:flex lg:w-1/2 bg-glowPeach items-center justify-center">
         <div className="text-center">
@@ -88,14 +76,8 @@ const RegisterPage: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className={`w-full px-3 py-2 border ${
-                  error && error.includes("email")
-                    ? "border-red-500"
-                    : "border-softGray"
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-sandBrown font-satoshi`}
-                aria-describedby={
-                  error && error.includes("email") ? "email-error" : undefined
-                }
+                autoComplete="email"
+                className="w-full px-3 py-2 border border-softGray rounded-md focus:outline-none focus:ring-2 focus:ring-sandBrown font-satoshi"
               />
             </div>
             <div>
@@ -111,16 +93,8 @@ const RegisterPage: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className={`w-full px-3 py-2 border ${
-                  error && error.includes("password")
-                    ? "border-red-500"
-                    : "border-softGray"
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-sandBrown font-satoshi`}
-                aria-describedby={
-                  error && error.includes("password")
-                    ? "password-error"
-                    : undefined
-                }
+                autoComplete="new-password"
+                className="w-full px-3 py-2 border border-softGray rounded-md focus:outline-none focus:ring-2 focus:ring-sandBrown font-satoshi"
               />
             </div>
             <div>
@@ -136,26 +110,10 @@ const RegisterPage: React.FC = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                className={`w-full px-3 py-2 border ${
-                  error && error.includes("password")
-                    ? "border-red-500"
-                    : "border-softGray"
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-sandBrown font-satoshi`}
-                aria-describedby={
-                  error && error.includes("password")
-                    ? "password-error"
-                    : undefined
-                }
+                autoComplete="confirm-password"
+                className="w-full px-3 py-2 border border-softGray rounded-md focus:outline-none focus:ring-2 focus:ring-sandBrown font-satoshi"
               />
             </div>
-            {error && (
-              <p
-                id="error-message"
-                className="text-red-500 text-sm font-satoshi"
-              >
-                {error}
-              </p>
-            )}
             <button
               type="submit"
               disabled={isLoading}

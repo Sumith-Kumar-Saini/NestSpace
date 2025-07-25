@@ -1,30 +1,39 @@
+import { lazy, Suspense, type JSX } from "react";
 import Root from "@/layout/Root";
-import About from "@/pages/About";
-import Home from "@/pages/Home";
-import Login from "@/pages/Login";
-import Product from "@/pages/Product";
-import Products from "@/pages/Products";
-import Register from "@/pages/Register";
 import { type RouteObject } from "react-router";
+
+// Lazy-loaded components
+const Home = lazy(() => import("@/pages/Home"));
+const About = lazy(() => import("@/pages/About"));
+const Products = lazy(() => import("@/pages/Products"));
+const Product = lazy(() => import("@/pages/Product"));
+const Login = lazy(() => import("@/pages/Login"));
+const Register = lazy(() => import("@/pages/Register"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
+
+// Suspense wrapper
+const withSuspense = (
+  Component: React.LazyExoticComponent<() => JSX.Element>
+) => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Component />
+  </Suspense>
+);
 
 const routes: RouteObject[] = [
   {
     path: "/",
     element: <Root />,
     children: [
-      { path: "/", element: <Home /> },
-      { path: "/about", element: <About /> },
-      { path: "/products", element: <Products /> },
-      { path: "/product/:slug", element: <Product /> },
+      { path: "/", element: withSuspense(Home) },
+      { path: "/about", element: withSuspense(About) },
+      { path: "/products", element: withSuspense(Products) },
+      { path: "/product/:slug", element: withSuspense(Product) },
     ],
   },
-  // Auth related
-  { path: "/login", element: <Login /> },
-  { path: "/register", element: <Register /> },
-  {
-    path: "*",
-    element: "404 Page not found",
-  },
+  { path: "/login", element: withSuspense(Login) },
+  { path: "/register", element: withSuspense(Register) },
+  { path: "*", element: withSuspense(NotFound) },
 ];
 
 export default routes;

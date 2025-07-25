@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import type { JSX } from "react";
+import { Link } from "react-router";
 
 // Variants for Framer Motion animations
 const fadeIn = {
@@ -186,18 +188,18 @@ const CTASection: React.FC = () => {
         <h2 className="font-grotesk text-3xl md:text-4xl mb-6">
           Ready to reclaim your workspace?
         </h2>
-        <a
-          href="/products"
+        <Link
+          to="/products"
           className="inline-block bg-sandBrown text-eggshell font-satoshi px-6 py-3 rounded-md hover:bg-glowPeach hover:text-charcoal transition-colors duration-300"
         >
           Explore Products
-        </a>
+        </Link>
       </div>
     </motion.section>
   );
 };
 
-const AboutPage: React.FC = () => {
+const AboutPage: () => JSX.Element = () => {
   return (
     <div className="min-h-screen bg-eggshell">
       <HeroSection />

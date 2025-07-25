@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import { motion } from "framer-motion";
+import { ToastContainer } from "react-toastify";
 import axios from "@/lib/axios";
 import { Link, useNavigate } from "react-router";
+import "react-toastify/dist/ReactToastify.css";
 
 // Framer Motion variants
 const fadeIn = {
@@ -9,31 +11,20 @@ const fadeIn = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-const LoginPage: React.FC = () => {
+const LoginPage: () => JSX.Element = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
     setIsLoading(true);
 
     try {
-      const response = await axios.post("/auth/login", { email, password });
-      // Handle successful login (e.g., store token, redirect)
-      console.log("Login successful:", response.data);
+      const response = await axios.post("/api/auth/login", { email, password });
+      localStorage.setItem("token", response.data.data.token);
       navigate("/products");
-    } catch (err) {
-      if (err instanceof Error) {
-        console.log(err.message);
-        setError(err.message || "Invalid email or password");
-      } else {
-        console.log(err);
-        setError("Invalid email or password");
-      }
     } finally {
       setIsLoading(false);
     }
@@ -41,6 +32,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <section className="min-h-screen bg-eggshell flex flex-col lg:flex-row">
+      <ToastContainer />
       {/* Brand/Graphic Side - Hidden on mobile */}
       <div className="hidden lg:flex lg:w-1/2 bg-glowPeach items-center justify-center">
         <div className="text-center">
@@ -76,11 +68,8 @@ const LoginPage: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className={`w-full px-3 py-2 border ${
-                  error ? "border-red-500" : "border-softGray"
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-sandBrown font-satoshi`}
-                aria-describedby={error ? "email-error" : undefined}
-                autoComplete="username"
+                className="w-full px-3 py-2 border border-softGray rounded-md focus:outline-none focus:ring-2 focus:ring-sandBrown font-satoshi"
+                autoComplete="email"
               />
             </div>
             <div>
@@ -96,21 +85,10 @@ const LoginPage: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className={`w-full px-3 py-2 border ${
-                  error ? "border-red-500" : "border-softGray"
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-sandBrown font-satoshi`}
-                aria-describedby={error ? "password-error" : undefined}
+                className="w-full px-3 py-2 border border-softGray rounded-md focus:outline-none focus:ring-2 focus:ring-sandBrown font-satoshi"
                 autoComplete="current-password"
               />
             </div>
-            {error && (
-              <p
-                id="error-message"
-                className="text-red-500 text-sm font-satoshi"
-              >
-                {error}
-              </p>
-            )}
             <button
               type="submit"
               disabled={isLoading}
