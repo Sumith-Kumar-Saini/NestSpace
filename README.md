@@ -1,4 +1,4 @@
-# NestSpace [WIP]
+# NestSpace
 Reclaim Your Focus. Redefine Remote Work.
 
 NestSpace is a boutique remote work brand experience built for modern creators, freelancers, and digital dreamers. Designed to feel like a real DTC (Direct-to-Consumer) e-commerce brand — but crafted as a frontend-first masterpiece.
